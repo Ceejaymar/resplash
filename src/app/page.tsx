@@ -1,27 +1,16 @@
-import Image from "next/image";
-import { type Basic as UnsplashImage } from "unsplash-js/dist/methods/photos/types";
-
-import { newPhotos } from "@/lib/unsplash";
+import { getPhotos } from "@/lib/unsplash";
+import styles from "./page.module.css";
+import Gallery from "./components/gallery/gallery";
 
 export default async function Home() {
-  const { data, rate } = await newPhotos();
+  const { data, rate } = await getPhotos(1, 30);
+
   console.log("dataa", data);
   console.log("rate", rate);
+
   return (
-    <>
-      {data.map((image: UnsplashImage) => {
-        return (
-          <Image
-            key={image.id}
-            src={image.urls.small}
-            alt={image.alt_description ?? ""}
-            blurDataURL={image.blur_hash}
-            placeholder="blur"
-            width={500}
-            height={500}
-          />
-        );
-      })}
-    </>
+    <section>
+      <Gallery images={data} />
+    </section>
   );
 }
