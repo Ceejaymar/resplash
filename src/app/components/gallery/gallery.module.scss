@@ -1,11 +1,11 @@
 .imageContainer {
   column-count: 3;
-  column-gap: 1rem;
+  column-gap: 0.5rem;
 }
 
 .imageContainer > * {
   break-inside: avoid;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .imageContainer img {

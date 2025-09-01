@@ -31,6 +31,12 @@ body {
   font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
