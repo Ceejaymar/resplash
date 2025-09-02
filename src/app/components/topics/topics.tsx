@@ -6,13 +6,13 @@ export default async function Topics() {
 
   return (
     <div className="relative">
-      <div className="flex items-center py-8 whitespace-nowrap gap-3 overflow-scroll no-scrollbar">
+      <div className="flex items-center py-8 whitespace-nowrap gap-3 overflow-scroll no-scrollbar px-6">
         {data.map((topic) => (
           <TopicPill
             key={topic.id}
             title={topic.title}
             slug={topic.slug}
-            image={topic["cover_photo"].urls.small}
+            image={topic["cover_photo"].urls.raw}
           />
         ))}
       </div>

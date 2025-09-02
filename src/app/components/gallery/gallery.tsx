@@ -3,10 +3,22 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import type { Basic as UnsplashImage } from "unsplash-js/dist/methods/photos/types";
-import styles from "./gallery.module.scss";
 
-export default function Gallery({ initial, fetchPage }) {
+type FetchPage = (page: number) => Promise<UnsplashImage[]>;
+
+export default function Gallery({
+  initial,
+  fetchPage,
+  columns = { 640: 1, 767: 2, 1023: 3 },
+  gutters = { 640: "8px", 767: "12px", 1023: "32px" },
+}: {
+  initial: UnsplashImage[];
+  fetchPage: FetchPage;
+  columns?: Record<number, number>;
+  gutters?: Record<number, string>;
+}) {
   const [items, setItems] = useState(initial);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -32,26 +44,32 @@ export default function Gallery({ initial, fetchPage }) {
   }
 
   return (
-    <div>
-      <InfiniteScroll
-        dataLength={items.length}
-        next={loadMore}
-        hasMore={hasMore}
-        loader={<p className="p-2">Loading…</p>}
-        endMessage={<p className="p-2 text-center">End of feed.</p>}
-        className={styles.imageContainer}
-        scrollThreshold={0.9}
+    <InfiniteScroll
+      dataLength={items.length}
+      next={loadMore}
+      hasMore={hasMore}
+      loader={<p className="p-2">Loading…</p>}
+      endMessage={<p className="p-2 text-center">End of feed.</p>}
+      className="md:px-6"
+    >
+      <ResponsiveMasonry
+        columnsCountBreakPoints={columns}
+        gutterBreakpoints={gutters}
       >
-        {items.map((image) => (
-          <Image
-            key={image.id}
-            src={image.urls.small}
-            alt={image.alt_description ?? ""}
-            width={500}
-            height={500}
-          />
-        ))}
-      </InfiniteScroll>
-    </div>
+        <Masonry sequential={true}>
+          {items.map((img) => (
+            <div key={img.id} style={{ overflow: "hidden", borderRadius: 6 }}>
+              <Image
+                src={img.urls.regular}
+                alt={img.alt_description ?? ""}
+                width={img.width}
+                height={img.height}
+                sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+              />
+            </div>
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
+    </InfiniteScroll>
   );
 }
