@@ -5,8 +5,9 @@ export async function GET(req: Request) {
 
   try {
     const { data } = await getPhotos(page, 30);
+
     return Response.json(data);
-  } catch (e: any) {
+  } catch (e) {
     return Response.json(
       { error: e?.message ?? "Unsplash failed" },
       { status: e?.status ?? 500 }
