@@ -10,10 +10,12 @@ export async function getTopics(page = 1, perPage = 30, slug = "") {
   });
 
   if (!res.ok) {
-    return Response.json(
-      { error: "Unsplash error", status: res.status },
-      { status: res.status }
-    );
+    const body = await res.text().catch(() => "");
+    const err = new Error(body || `Unsplash ${res.status}`) as Error & {
+      status: number;
+    };
+    err.status = res.status;
+    throw err;
   }
 
   const data = await res.json();
@@ -31,10 +33,12 @@ export async function getTopicPhotos(page = 1, perPage = 10, slug = "") {
   );
 
   if (!res.ok) {
-    return Response.json(
-      { error: "Unsplash error", status: res.status },
-      { status: res.status }
-    );
+    const body = await res.text().catch(() => "");
+    const err = new Error(body || `Unsplash ${res.status}`) as Error & {
+      status: number;
+    };
+    err.status = res.status;
+    throw err;
   }
 
   const data = await res.json();

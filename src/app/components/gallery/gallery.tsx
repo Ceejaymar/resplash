@@ -11,13 +11,11 @@ type FetchPage = (page: number) => Promise<UnsplashImage[]>;
 export default function Gallery({
   initial,
   fetchPage,
-  columns = { 640: 1, 767: 2, 1023: 3 },
-  gutters = { 640: "8px", 767: "12px", 1023: "32px" },
+  columns = { 639: 1, 767: 2, 1023: 3 },
 }: {
   initial: UnsplashImage[];
   fetchPage: FetchPage;
   columns?: Record<number, number>;
-  gutters?: Record<number, string>;
 }) {
   const [items, setItems] = useState(initial);
   const [page, setPage] = useState(1);
@@ -52,10 +50,7 @@ export default function Gallery({
       endMessage={<p className="p-2 text-center">End of feed.</p>}
       className="md:px-6"
     >
-      <ResponsiveMasonry
-        columnsCountBreakPoints={columns}
-        gutterBreakpoints={gutters}
-      >
+      <ResponsiveMasonry columnsCountBreakPoints={columns}>
         <Masonry sequential={true}>
           {items.map((img) => (
             <div key={img.id} style={{ overflow: "hidden", borderRadius: 6 }}>

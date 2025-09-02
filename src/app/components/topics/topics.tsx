@@ -1,3 +1,4 @@
+import { type Basic as Topic } from "unsplash-js/dist/methods/topics/types";
 import { getTopics } from "@/lib/topics";
 import TopicPill from "./topic-pill";
 
@@ -7,12 +8,12 @@ export default async function Topics() {
   return (
     <div className="relative">
       <div className="flex items-center py-8 whitespace-nowrap gap-3 overflow-scroll no-scrollbar px-6">
-        {data.map((topic) => (
+        {data.map((topic: Topic) => (
           <TopicPill
             key={topic.id}
             title={topic.title}
             slug={topic.slug}
-            image={topic["cover_photo"].urls.raw}
+            image={topic.cover_photo?.urls.raw || ""}
           />
         ))}
       </div>

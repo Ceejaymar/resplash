@@ -15,10 +15,12 @@ export async function getPhotos(page = 1, perPage = 30) {
   };
 
   if (!res.ok) {
-    return Response.json(
-      { error: "Unsplash error", status: res.status, rate },
-      { status: res.status }
-    );
+    const body = await res.text().catch(() => "");
+    const err = new Error(body || `Unsplash ${res.status}`) as Error & {
+      status: number;
+    };
+    err.status = res.status;
+    throw err;
   }
 
   const data = await res.json();
