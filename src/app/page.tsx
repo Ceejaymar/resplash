@@ -1,7 +1,8 @@
 import { getPhotos } from "@/lib/unsplash";
-import styles from "./page.module.css";
-import Gallery from "./components/gallery/gallery";
+
+import PhotosGallery from "./components/gallery/photos-gallery";
 import Topics from "./components/topics/topics";
+import styles from "./page.module.css";
 
 export default async function Home() {
   const { data, rate } = await getPhotos(1, 30);
@@ -9,7 +10,7 @@ export default async function Home() {
   return (
     <section>
       <Topics />
-      <Gallery images={data} />
+      <PhotosGallery initial={data} />;
     </section>
   );
 }

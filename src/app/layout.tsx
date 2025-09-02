@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Batey",
+  title: "Resplash",
   description: "Cultivated Cloth, Crafted for Comfort.",
 };
 
