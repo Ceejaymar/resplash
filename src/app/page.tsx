@@ -4,7 +4,7 @@ import PhotosGallery from "./components/gallery/photos-gallery";
 import Topics from "./components/topics/topics";
 
 export default async function Home() {
-  const { data } = await getPhotos(1, 30);
+  const { data, rate } = await getPhotos(1, 30);
 
   return (
     <section>

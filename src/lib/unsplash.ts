@@ -27,3 +27,26 @@ export async function getPhotos(page = 1, perPage = 30) {
 
   return { data, rate };
 }
+
+export async function searchPhotos(page = 1, perPage = 30, query: string) {
+  const res = await fetch(
+    `${api}/search/photos?query=${query}page=${page}&per_page=${perPage}`,
+    {
+      headers: { authorization: `Client-ID ${key}`, "Accept-Version": "v1" },
+      next: { revalidate: 3600 },
+    }
+  );
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    const err = new Error(body || `Unsplash ${res.status}`) as Error & {
+      status: number;
+    };
+    err.status = res.status;
+    throw err;
+  }
+
+  const data = await res.json();
+
+  return { data };
+}
