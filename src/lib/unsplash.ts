@@ -30,7 +30,7 @@ export async function getPhotos(page = 1, perPage = 30) {
 
 export async function searchPhotos(page = 1, perPage = 30, query: string) {
   const res = await fetch(
-    `${api}/search/photos?query=${query}page=${page}&per_page=${perPage}`,
+    `${api}/search/photos?query=${query}&page=${page}&per_page=${perPage}`,
     {
       headers: { authorization: `Client-ID ${key}`, "Accept-Version": "v1" },
       next: { revalidate: 3600 },
