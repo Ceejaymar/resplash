@@ -24,10 +24,12 @@ export default async function Page({ params }: PageProps) {
     <div>
       <div className="relative w-full h-96 mb-8">
         <Image
+          className="md:px-6"
           src={coverPhoto}
           alt={coverAlt}
           fill
           style={{ objectFit: "cover", objectPosition: "50% 70%" }}
+          priority
         />
       </div>
       <TopicsGallery initial={topicPhotos} slug={slug} />
