@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+
 import Search from "../search/search";
 import resplashLogo from "../../../../public/resplash-icon.webp";
 
@@ -8,7 +10,7 @@ export default function Navbar() {
       data-testid="navigation"
       className="flex items-center gap-4 py-4 font-bold px-6 md:gap-16"
     >
-      <div className="flex gap-2 items-center">
+      <Link href="/" className="flex gap-2 items-center">
         <Image
           src={resplashLogo}
           alt="resplash logo"
@@ -19,7 +21,7 @@ export default function Navbar() {
         <span className="text-xl tracking-tighter font-semibold hidden md:block">
           Resplash
         </span>
-      </div>
+      </Link>
       <Search />
     </nav>
   );
