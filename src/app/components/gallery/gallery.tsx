@@ -24,7 +24,9 @@ export default function Gallery({
 
   async function loadMore() {
     const next = page + 1;
+
     const res = await fetchPage(next);
+
     if (!res.length) {
       setHasMore(false);
       return;
@@ -38,7 +40,7 @@ export default function Gallery({
       }
     }
     setItems((prev) => [...prev, ...uniques]);
-    setPage(next);
+    setPage((prev) => prev + 1);
   }
 
   return (
