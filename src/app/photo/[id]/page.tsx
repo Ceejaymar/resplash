@@ -39,7 +39,7 @@ export default async function photo({ params }: PageProps) {
   ];
 
   return (
-    <main className="flex flex-col gap-6 pt-5 px-6 md:pt-15">
+    <main className="flex flex-col gap-6 pt-5 px-6 md:pt-15 md:gap-10">
       <header className="flex justify-between">
         <div className="flex items-center gap-3">
           <div className="relative w-8 h-8 rounded-full overflow-hidden">
@@ -69,12 +69,11 @@ export default async function photo({ params }: PageProps) {
             priority
           />
         </figure>
-        {photo.description ||
-          (photo.alt_description && (
-            <figcaption className="text-2xl font-semibold mt-8 text-neutral-900">
-              {photo.description || photo.alt_description}
-            </figcaption>
-          ))}
+        {(photo.description || photo.alt_description) && (
+          <span className="text-2xl font-semibold mt-8 text-neutral-900">
+            {photo.description || photo.alt_description}
+          </span>
+        )}
       </div>
 
       <section className="flex flex-col gap-5 justify-between max-w-1/2 md:flex-row md:gap-0">
