@@ -50,3 +50,23 @@ export async function searchPhotos(page = 1, perPage = 30, query: string) {
 
   return { data };
 }
+
+export async function getPhoto(id: string) {
+  const res = await fetch(`${api}/photos/${id}`, {
+    headers: { authorization: `Client-ID ${key}`, "Accept-Version": "v1" },
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    const err = new Error(body || `Unsplash ${res.status}`) as Error & {
+      status: number;
+    };
+    err.status = res.status;
+    throw err;
+  }
+
+  const data = await res.json();
+
+  return { data };
+}
