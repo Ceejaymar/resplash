@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav
       data-testid="navigation"
-      className="flex items-center gap-4 py-4 font-bold px-6 md:gap-16"
+      className="flex items-center gap-4 py-4 font-bold px-4 md:px-6 md:gap-16"
     >
       <Link href="/" className="flex gap-2 items-center">
         <Image

@@ -12,7 +12,7 @@ type FetchPage = (page: number) => Promise<UnsplashImage[]>;
 export default function Gallery({
   initial,
   fetchPage,
-  columns = { 639: 1, 767: 2, 1023: 3 },
+  columns = { 767: 2, 1023: 3 },
 }: {
   initial: UnsplashImage[];
   fetchPage: FetchPage;
@@ -51,7 +51,7 @@ export default function Gallery({
       hasMore={hasMore}
       loader={<p className="p-2">Loading…</p>}
       endMessage={<p className="p-2 text-center">End of feed.</p>}
-      className="md:px-6"
+      className="px-1 md:px-6"
     >
       <ResponsiveMasonry columnsCountBreakPoints={columns}>
         <Masonry sequential={true}>
