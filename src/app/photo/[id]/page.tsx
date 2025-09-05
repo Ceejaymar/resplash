@@ -1,5 +1,10 @@
+import Image from "next/image";
+import type { Full as UnsplashImage } from "unsplash-js/dist/methods/photos/types";
+
 import { getPhoto } from "@/lib/unsplash";
-import React from "react";
+import Button from "@/app/components/button/button";
+import formatNumber from "@/app/utils/formatNumberString";
+import formatDate from "@/app/utils/formatDate";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -7,8 +12,82 @@ interface PageProps {
 
 export default async function photo({ params }: PageProps) {
   const { id } = await params;
+  const { data } = await getPhoto(id);
+  const photo = data as UnsplashImage;
 
-  const { data: photo } = await getPhoto(id);
+  console.log(photo.related_collections.results[0]);
 
-  return <div>{photo.location.name}</div>;
+  const photoData = [
+    {
+      name: "views",
+      value: formatNumber(photo.views),
+    },
+    {
+      name: "date",
+      value: formatDate(photo.created_at),
+    },
+    {
+      name: "downloads",
+      value: formatNumber(photo.downloads),
+    },
+  ];
+
+  return (
+    <main className="flex flex-col gap-6 pt-15 px-6">
+      <header className="flex justify-between">
+        <div className="flex items-center gap-3">
+          <div className="relative w-8 h-8 rounded-full overflow-hidden">
+            <Image
+              src={photo.user.profile_image.medium}
+              alt={`${photo.user.username}'s profile avatar`}
+              fill
+              sizes="40px"
+            />
+          </div>
+          <span className="font-semibold">{photo.user.name}</span>
+        </div>
+        <button className=" bg-indigo-700 text-white py-2 px-4 rounded">
+          Download
+        </button>
+      </header>
+
+      <div className="rounded-xl overflow-hidden">
+        <figure className="relative w-full h-[70vh] overflow-hidden">
+          <Image
+            src={photo.urls.full}
+            alt={photo.alt_description || ""}
+            fill
+            className="object-contain"
+            priority
+          />
+        </figure>
+        {photo.description ||
+          (photo.alt_description && (
+            <figcaption className="text-2xl font-semibold mt-8 text-neutral-900">
+              {photo.description || photo.alt_description}
+            </figcaption>
+          ))}
+      </div>
+
+      <section className="flex justify-between max-w-1/2">
+        {photoData.map((d) => (
+          <article key={d.name} className="flex flex-col gap-1">
+            <span className="text-neutral-600 capitalize">{d.name}</span>
+            <span className="font-semibold text-neutral-900">{d.value}</span>
+          </article>
+        ))}
+      </section>
+
+      <ul className="flex flex-wrap gap-4 mt-8">
+        {photo.tags.map((tag) => (
+          <li
+            key={tag.title}
+            className="font-medium capitalize text-neutral-600"
+          >
+            #{tag.title}
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
 }

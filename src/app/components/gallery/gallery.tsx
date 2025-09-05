@@ -79,7 +79,7 @@ export default function Gallery({
                         sizes="40px"
                       />
                     </div>
-                    <div className="text-white min-w-min min-h-min">
+                    <div className="text-white">
                       <span className="font-semibold">{img.user.name}</span>
                       <p className="text-white/70 line-clamp-1">
                         {img.description || img.alt_description}
