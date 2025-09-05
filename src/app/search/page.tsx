@@ -2,11 +2,11 @@ import { searchPhotos } from "@/lib/unsplash";
 import SearchGallery from "../components/gallery/search-gallery";
 
 interface PageProps {
-  searchParams?: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }
 
 export default async function Page({ searchParams }: PageProps) {
-  const q = searchParams?.q ?? "";
+  const { q } = await searchParams;
 
   if (!q) return <p>No query provided.</p>;
 
