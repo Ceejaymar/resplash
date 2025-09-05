@@ -14,8 +14,9 @@ export default async function Page({ searchParams }: PageProps) {
 
   return (
     <main>
-      <h1 className="px-4 mb-4 text-lg font-semibold text-neutral-800">
-        Search results for &quot;{q}&quot;
+      <h1 className="py-2 px-4 mb-4 text-lg text-neutral-800 md:px-6 md:py-4">
+        Search results for{" "}
+        <span className="font-semibold">&quot;{q}&quot;</span>
       </h1>
       <SearchGallery initial={data.results} query={q} />;
     </main>
