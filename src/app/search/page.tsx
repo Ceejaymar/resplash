@@ -15,7 +15,7 @@ export default async function Page({ searchParams }: PageProps) {
   return (
     <main>
       <h1 className="px-4 mb-4 text-lg font-semibold text-neutral-800">
-        Search results for "{q}"
+        Search results for &quot;{q}&quot;
       </h1>
       <SearchGallery initial={data.results} query={q} />;
     </main>
