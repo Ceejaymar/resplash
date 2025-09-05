@@ -26,7 +26,7 @@ export default function TopicPill({
       <div className="relative w-8 h-8 rounded-full overflow-hidden">
         <Image src={image} alt={title} fill sizes="40px" />
       </div>
-      <span>{title}</span>
+      <span className="text-sm">{title}</span>
     </Link>
   );
 }

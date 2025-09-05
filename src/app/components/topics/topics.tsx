@@ -11,7 +11,7 @@ export default async function Topics({ currentPath }: Topics) {
 
   return (
     <div className="relative">
-      <div className="flex items-center py-8 whitespace-nowrap gap-3 overflow-scroll no-scrollbar px-6">
+      <div className="flex items-center py-8 whitespace-nowrap gap-3 overflow-scroll no-scrollbar px-4 md:px-6">
         {data.map((topic: Topic) => (
           <TopicPill
             key={topic.id}
