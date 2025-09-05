@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Full as UnsplashImage } from "unsplash-js/dist/methods/photos/types";
 
 import { getPhoto } from "@/lib/unsplash";
-import Button from "@/app/components/button/button";
+// import Button from "@/app/components/button/button";
 import formatNumber from "@/app/utils/formatNumberString";
 import formatDate from "@/app/utils/formatDate";
 
@@ -10,12 +10,18 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+interface ImagesWithExtras extends UnsplashImage {
+  views: number;
+  downloads: number;
+  tags: { type: string; title: string }[];
+}
+
 export default async function photo({ params }: PageProps) {
   const { id } = await params;
   const { data } = await getPhoto(id);
-  const photo = data as UnsplashImage;
+  const photo = data as ImagesWithExtras;
 
-  console.log(photo.related_collections.results[0]);
+  // console.log(photo.related_collections.results[0]);
 
   const photoData = [
     {
