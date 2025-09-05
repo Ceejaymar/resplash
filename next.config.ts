@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  allowedDevOrigins: ["192.168.1.152"],
   experimental: {
     optimizePackageImports: ["@phosphor-icons/react"],
   },

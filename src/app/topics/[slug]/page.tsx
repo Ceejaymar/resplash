@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { getTopics, getTopicPhotos } from "@/lib/topics";
 import TopicsGallery from "@/app/components/gallery/topics-gallery";
+import Topics from "@/app/components/topics/topics";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -22,6 +23,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <div>
+      <Topics currentPath={slug} />
       <div className="relative w-full h-96 mb-8">
         <Image
           className="md:px-6"

@@ -55,7 +55,11 @@ export default function Gallery({
       <ResponsiveMasonry columnsCountBreakPoints={columns}>
         <Masonry sequential={true}>
           {items.map((img) => (
-            <div key={img.id} style={{ overflow: "hidden", borderRadius: 6 }}>
+            <div
+              className="relative"
+              key={img.id}
+              style={{ overflow: "hidden", borderRadius: 6 }}
+            >
               <Image
                 src={img.urls.regular}
                 alt={img.alt_description ?? ""}
@@ -63,6 +67,9 @@ export default function Gallery({
                 height={img.height}
                 sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
               />
+              <div className="absolute top-0 bottom-0 w-full">
+                <div></div>
+              </div>
             </div>
           ))}
         </Masonry>

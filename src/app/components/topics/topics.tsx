@@ -2,7 +2,11 @@ import { type Basic as Topic } from "unsplash-js/dist/methods/topics/types";
 import { getTopics } from "@/lib/topics";
 import TopicPill from "./topic-pill";
 
-export default async function Topics() {
+type Topics = {
+  currentPath?: string;
+};
+
+export default async function Topics({ currentPath }: Topics) {
   const { data } = await getTopics(1, 30);
 
   return (
@@ -14,6 +18,7 @@ export default async function Topics() {
             title={topic.title}
             slug={topic.slug}
             image={topic.cover_photo?.urls.raw || ""}
+            currentPath={currentPath || ""}
           />
         ))}
       </div>
