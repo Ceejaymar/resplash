@@ -33,7 +33,7 @@ export default async function photo({ params }: PageProps) {
   ];
 
   return (
-    <main className="flex flex-col gap-6 pt-15 px-6">
+    <main className="flex flex-col gap-6 pt-5 px-6 md:pt-15">
       <header className="flex justify-between">
         <div className="flex items-center gap-3">
           <div className="relative w-8 h-8 rounded-full overflow-hidden">
@@ -44,7 +44,9 @@ export default async function photo({ params }: PageProps) {
               sizes="40px"
             />
           </div>
-          <span className="font-semibold">{photo.user.name}</span>
+          <span className="font-semibold text-sm md:text-base">
+            {photo.user.name}
+          </span>
         </div>
         <button className=" bg-indigo-700 text-white py-2 px-4 rounded">
           Download
@@ -69,7 +71,7 @@ export default async function photo({ params }: PageProps) {
           ))}
       </div>
 
-      <section className="flex justify-between max-w-1/2">
+      <section className="flex flex-col gap-5 justify-between max-w-1/2 md:flex-row md:gap-0">
         {photoData.map((d) => (
           <article key={d.name} className="flex flex-col gap-1">
             <span className="text-neutral-600 capitalize">{d.name}</span>
