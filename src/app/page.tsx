@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <section>
       <Topics />
-      <PhotosGallery initial={data} />;
+      <PhotosGallery initial={data} />
     </section>
   );
 }

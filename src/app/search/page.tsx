@@ -18,7 +18,7 @@ export default async function Page({ searchParams }: PageProps) {
         Search results for{" "}
         <span className="font-semibold">&quot;{q}&quot;</span>
       </h1>
-      <SearchGallery initial={data.results} query={q} />;
+      <SearchGallery initial={data.results} query={q} />
     </main>
   );
 }

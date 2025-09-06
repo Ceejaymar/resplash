@@ -49,8 +49,10 @@ export default function Gallery({
       dataLength={items.length}
       next={loadMore}
       hasMore={hasMore}
-      loader={<p className="p-2">Loading…</p>}
-      endMessage={<p className="p-2 text-center">End of feed.</p>}
+      loader={<p className="p-2 text-center text-xl font-semibold">Loading…</p>}
+      endMessage={
+        <p className="p-2 text-center text-xl font-semibold">End of feed.</p>
+      }
       className="px-1 md:px-6"
     >
       <ResponsiveMasonry columnsCountBreakPoints={columns}>

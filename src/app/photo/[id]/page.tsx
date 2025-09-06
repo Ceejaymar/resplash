@@ -54,12 +54,12 @@ export default async function photo({ params }: PageProps) {
             {photo.user.name}
           </span>
         </div>
-        <button className=" bg-indigo-700 text-white py-2 px-4 rounded">
+        <button className=" bg-indigo-700 text-white text-sm py-2 px-4 rounded md:text-base">
           Download
         </button>
       </header>
 
-      <div className="rounded-xl overflow-hidden">
+      <div className="flex flex-col gap-5 rounded-xl overflow-hidden">
         <figure className="relative w-full h-[70vh] overflow-hidden">
           <Image
             src={photo.urls.full}
@@ -70,13 +70,13 @@ export default async function photo({ params }: PageProps) {
           />
         </figure>
         {(photo.description || photo.alt_description) && (
-          <span className="text-2xl font-semibold mt-8 text-neutral-900">
+          <span className="text-2xl font-semibold text-neutral-900">
             {photo.description || photo.alt_description}
           </span>
         )}
       </div>
 
-      <section className="flex flex-col gap-5 justify-between max-w-1/2 md:flex-row md:gap-0">
+      <section className="flex flex-col gap-5 justify-between max-w-1/2 text-sm md:text-base md:flex-row md:gap-0">
         {photoData.map((d) => (
           <article key={d.name} className="flex flex-col gap-1">
             <span className="text-neutral-600 capitalize">{d.name}</span>
