@@ -58,9 +58,16 @@ export async function searchPhotos(page = 1, perPage = 30, query: string) {
     throw err;
   }
 
-  const data = await res.json();
+  const response = await res.json();
+  const dataWithBlurhash = await Promise.all(
+    response.results.map(withBlurhash)
+  );
 
-  return { data };
+  return {
+    data: dataWithBlurhash,
+    total: response.total,
+    total_pages: response.total_pages,
+  };
 }
 
 export async function getPhoto(id: string) {
