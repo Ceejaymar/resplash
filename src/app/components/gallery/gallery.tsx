@@ -70,7 +70,7 @@ export default function Gallery({
                 height={img.height}
                 sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
               />
-              <Link href={`photo/${img.id}`}>
+              <Link href={`/photo/${img.id}`}>
                 <div className="absolute top-0 bottom-0 w-full flex items-end pb-4 pl-4 bg-black/45 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <div className="flex items-center gap-2">
                     <div className="relative w-8 h-8 rounded-full overflow-hidden">
