@@ -1,7 +1,9 @@
-import { YoutubeLogoIcon } from "@phosphor-icons/react/dist/ssr";
-import { InstagramLogoIcon } from "@phosphor-icons/react/dist/ssr";
-import { LinkedinLogoIcon } from "@phosphor-icons/react/dist/ssr";
-import { GithubLogoIcon } from "@phosphor-icons/react/dist/ssr";
+import {
+  YoutubeLogoIcon,
+  InstagramLogoIcon,
+  LinkedinLogoIcon,
+  GithubLogoIcon,
+} from "@phosphor-icons/react/dist/ssr";
 
 export default function Footer() {
   return (
