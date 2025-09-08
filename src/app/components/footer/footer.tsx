@@ -15,7 +15,6 @@ export default function Footer() {
           href="https://www.youtube.com/@Losliving"
           target="_blank"
           rel="noopener noreferrer"
-          // className="text-indigo-600 underline"
         >
           <YoutubeLogoIcon size="24" weight="regular" color="#525252" />
         </a>
@@ -23,7 +22,6 @@ export default function Footer() {
           href="https://www.instagram.com/steadyonthego"
           target="_blank"
           rel="noopener noreferrer"
-          // className="text-indigo-600 underline"
         >
           <InstagramLogoIcon size="24" weight="regular" color="#525252" />
         </a>
@@ -31,7 +29,6 @@ export default function Footer() {
           href="https://www.linkedin.com/in/carmart/"
           target="_blank"
           rel="noopener noreferrer"
-          // className="text-indigo-600 underline"
         >
           <LinkedinLogoIcon size="24" weight="regular" color="#525252" />
         </a>
@@ -39,7 +36,6 @@ export default function Footer() {
           href="https://github.com/Ceejaymar"
           target="_blank"
           rel="noopener noreferrer"
-          // className="text-indigo-600 underline"
         >
           <GithubLogoIcon size="24" weight="regular" color="#525252" />
         </a>
