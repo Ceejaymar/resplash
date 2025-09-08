@@ -33,6 +33,15 @@ export default async function Page({ params }: PageProps) {
           style={{ objectFit: "cover", objectPosition: "50% 70%" }}
           priority
         />
+        <div className="absolute top-0 bottom-0 flex flex-col gap-5 justify-center pl-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-white to-transparent" />
+          <h1 className="z-10 text-3xl text-neutral-900 font-semibold tracking-tight">
+            {topic.title}
+          </h1>
+          <p className="z-10 text-neutral-900 font-medium max-w-2/3 md:max-w-1/2">
+            {topic.description}
+          </p>
+        </div>
       </div>
       <TopicsGallery initial={topicPhotos} slug={slug} />
     </div>

@@ -6,6 +6,7 @@ type TopicPill = {
   image: string;
   slug: string;
   currentPath: string;
+  blurDataURL?: string;
 };
 
 export default function TopicPill({
@@ -13,6 +14,7 @@ export default function TopicPill({
   image,
   slug,
   currentPath,
+  blurDataURL,
 }: TopicPill) {
   const active = currentPath === slug;
 
@@ -24,7 +26,14 @@ export default function TopicPill({
       }`}
     >
       <div className="relative w-8 h-8 rounded-full overflow-hidden">
-        <Image src={image} alt={title} fill sizes="40px" />
+        <Image
+          src={image}
+          alt={title}
+          fill
+          sizes="40px"
+          placeholder="blur"
+          blurDataURL={blurDataURL}
+        />
       </div>
       <span className="text-sm">{title}</span>
     </Link>

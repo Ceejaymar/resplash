@@ -2,10 +2,11 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import type { Basic as UnsplashImage } from "unsplash-js/dist/methods/photos/types";
-import Link from "next/link";
+
+import { type UnsplashImage } from "@/types";
 
 type FetchPage = (page: number) => Promise<UnsplashImage[]>;
 
@@ -37,7 +38,7 @@ export default function Gallery({
     for (const p of res) {
       if (!seen.current.has(p.id)) {
         seen.current.add(p.id);
-        uniques.push(p);
+        uniques.push(p as UnsplashImage);
       }
     }
     setItems((prev) => [...prev, ...uniques]);
@@ -69,6 +70,8 @@ export default function Gallery({
                 width={img.width}
                 height={img.height}
                 sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
+                placeholder="blur"
+                blurDataURL={img.blurDataURL}
               />
               <Link href={`/photo/${img.id}`}>
                 <div className="absolute top-0 bottom-0 w-full flex items-end pb-4 pl-4 bg-black/45 opacity-0 transition-opacity duration-300 group-hover:opacity-100">

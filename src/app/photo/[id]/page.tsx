@@ -2,7 +2,6 @@ import Image from "next/image";
 import type { Full as UnsplashImage } from "unsplash-js/dist/methods/photos/types";
 
 import { getPhoto } from "@/lib/unsplash";
-// import Button from "@/app/components/button/button";
 import formatNumber from "@/app/utils/formatNumberString";
 import formatDate from "@/app/utils/formatDate";
 
@@ -14,14 +13,13 @@ interface ImagesWithExtras extends UnsplashImage {
   views: number;
   downloads: number;
   tags: { type: string; title: string }[];
+  blurDataURL: string;
 }
 
 export default async function photo({ params }: PageProps) {
   const { id } = await params;
   const { data } = await getPhoto(id);
   const photo = data as ImagesWithExtras;
-
-  // console.log(photo.related_collections.results[0]);
 
   const photoData = [
     {
@@ -62,11 +60,13 @@ export default async function photo({ params }: PageProps) {
       <div className="flex flex-col gap-5 rounded-xl overflow-hidden">
         <figure className="relative w-full h-[70vh] overflow-hidden">
           <Image
+            priority
             src={photo.urls.full}
             alt={photo.alt_description || ""}
             fill
             className="object-contain"
-            priority
+            placeholder="blur"
+            blurDataURL={photo.blurDataURL}
           />
         </figure>
         {(photo.description || photo.alt_description) && (
