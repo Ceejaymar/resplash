@@ -86,6 +86,7 @@ export async function getPhoto(id: string) {
   }
 
   const data = await res.json();
+  const dataWithBlurhash = await withBlurhash(data);
 
-  return { data };
+  return { data: dataWithBlurhash };
 }
