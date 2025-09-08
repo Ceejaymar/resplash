@@ -1,9 +1,5 @@
-// lib/blurhash.ts
 import { decode } from "blurhash";
-import { createCanvas } from "canvas"; // works on the server
-
-const FALLBACK_BLUR =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wIAAgMBAp7NswAAAABJRU5ErkJggg==";
+import { createCanvas } from "canvas";
 
 export function blurhashToDataUrl(
   hash?: string | null,

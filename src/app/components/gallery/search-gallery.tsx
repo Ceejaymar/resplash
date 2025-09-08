@@ -1,7 +1,7 @@
 "use client";
 
-import type { Basic as UnsplashImage } from "unsplash-js/dist/methods/photos/types";
 import Gallery from "./gallery";
+import { type UnsplashImage } from "@/types";
 
 interface SearchGalleryProps {
   initial: UnsplashImage[];

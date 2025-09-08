@@ -5,7 +5,18 @@ import { blurhashToDataUrl } from "../scripts/blurHashToData";
 const api = "https://api.unsplash.com/topics";
 const key = process.env.UNSPLASH_ACCESS_KEY;
 
-async function withBlurhash(item) {
+interface BlurHashable {
+  blur_hash?: string;
+  [key: string]: unknown;
+}
+
+interface WithBlurDataURL extends BlurHashable {
+  blurDataURL?: string;
+}
+
+async function withBlurhash<T extends BlurHashable>(
+  item: T
+): Promise<T & WithBlurDataURL> {
   return {
     ...item,
     blurDataURL: item.blur_hash
@@ -29,7 +40,8 @@ export async function getTopics(page = 1, perPage = 30, slug = "") {
     throw err;
   }
 
-  let data = await res.json();
+  const data = await res.json();
+
   if (Array.isArray(data)) {
     return {
       data: await Promise.all(

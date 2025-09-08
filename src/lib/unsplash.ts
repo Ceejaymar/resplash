@@ -5,7 +5,18 @@ import { blurhashToDataUrl } from "../scripts/blurHashToData";
 const api = "https://api.unsplash.com";
 const key = process.env.UNSPLASH_ACCESS_KEY;
 
-async function withBlurhash(item) {
+interface BlurHashable {
+  blur_hash?: string;
+  [key: string]: unknown;
+}
+
+interface WithBlurDataURL extends BlurHashable {
+  blurDataURL?: string;
+}
+
+async function withBlurhash<T extends BlurHashable>(
+  item: T
+): Promise<T & WithBlurDataURL> {
   return {
     ...item,
     blurDataURL: item.blur_hash
