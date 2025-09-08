@@ -20,7 +20,7 @@ export default function TopicPill({
     <Link
       href={`/topics/${slug}`}
       className={`flex items-center gap-2 no-underline rounded-full pl-1 pr-4 py-1 cursor-pointer ${
-        active ? "bg-indigo-200" : "bg-gray-200"
+        active ? "bg-indigo-200" : "bg-neutral-100"
       }`}
     >
       <div className="relative w-8 h-8 rounded-full overflow-hidden">
