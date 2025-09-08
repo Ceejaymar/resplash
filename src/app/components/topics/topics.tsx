@@ -19,6 +19,7 @@ export default async function Topics({ currentPath }: Topics) {
             slug={topic.slug}
             image={topic.cover_photo?.urls.raw || ""}
             currentPath={currentPath || ""}
+            blurDataURL={topic.cover_photo.blurDataURL}
           />
         ))}
       </div>

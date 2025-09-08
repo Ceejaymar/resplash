@@ -21,8 +21,6 @@ export default async function photo({ params }: PageProps) {
   const { data } = await getPhoto(id);
   const photo = data as ImagesWithExtras;
 
-  // console.log(photo.related_collections.results[0]);
-
   const photoData = [
     {
       name: "views",

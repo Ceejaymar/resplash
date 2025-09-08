@@ -1,7 +1,18 @@
 import "server-only";
 
+import { blurhashToDataUrl } from "../scripts/blurHashToData";
+
 const api = "https://api.unsplash.com";
 const key = process.env.UNSPLASH_ACCESS_KEY;
+
+async function withBlurhash(item) {
+  return {
+    ...item,
+    blurDataURL: item.blur_hash
+      ? await blurhashToDataUrl(item.blur_hash)
+      : undefined,
+  };
+}
 
 export async function getPhotos(page = 1, perPage = 30) {
   const res = await fetch(`${api}/photos?page=${page}&per_page=${perPage}`, {
@@ -23,7 +34,8 @@ export async function getPhotos(page = 1, perPage = 30) {
     throw err;
   }
 
-  const data = await res.json();
+  const response = await res.json();
+  const data = await Promise.all(response.map(withBlurhash));
 
   return { data, rate };
 }
