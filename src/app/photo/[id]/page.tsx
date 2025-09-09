@@ -4,6 +4,7 @@ import type { Full as UnsplashImage } from "unsplash-js/dist/methods/photos/type
 import { getPhoto } from "@/lib/unsplash";
 import formatNumber from "@/app/utils/formatNumberString";
 import formatDate from "@/app/utils/formatDate";
+import DownloadButton from "@/app/components/download-button/download-button";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -14,6 +15,7 @@ interface ImagesWithExtras extends UnsplashImage {
   downloads: number;
   tags: { type: string; title: string }[];
   blurDataURL: string;
+  slug: string;
 }
 
 export default async function photo({ params }: PageProps) {
@@ -52,9 +54,13 @@ export default async function photo({ params }: PageProps) {
             {photo.user.name}
           </span>
         </div>
-        <button className=" bg-indigo-700 text-white text-sm py-2 px-4 rounded md:text-base">
-          Download
-        </button>
+        <DownloadButton
+          photoId={photo.id}
+          slug={photo.slug}
+          urls={photo.urls}
+          width={photo.width}
+          height={photo.height}
+        />
       </header>
 
       <div className="flex flex-col gap-5 rounded-xl overflow-hidden">

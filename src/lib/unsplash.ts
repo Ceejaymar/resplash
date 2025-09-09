@@ -1,6 +1,6 @@
 import "server-only";
 
-import { blurhashToDataUrl } from "../scripts/blurHashToData";
+import { blurhashToDataUrl } from "../app/utils/blurHashToData";
 
 const api = "https://api.unsplash.com";
 const key = process.env.UNSPLASH_ACCESS_KEY;

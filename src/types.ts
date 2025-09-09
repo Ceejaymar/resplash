@@ -16,3 +16,12 @@ export interface UnsplashTopic extends Omit<Topic, "cover_photo"> {
       })
     | null;
 }
+
+export const sizeMap = {
+  Small: { field: "small", width: 640 },
+  Medium: { field: "regular", width: 1920 },
+  Large: { field: "full", width: 2400 },
+  Original: { field: "raw", width: null },
+} as const;
+
+export type SizeLabel = keyof typeof sizeMap;
