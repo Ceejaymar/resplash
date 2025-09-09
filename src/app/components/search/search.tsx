@@ -10,7 +10,7 @@ export default function Search() {
           name="q"
           placeholder="Search image Eg. Landscape"
           className="w-full border border-gray-200 rounded-sm px-4 py-2 
-          bg-[#e7e7e7] text-sm font-medium focus:bg-white focus:outline-gray-200 focus:outline-1"
+          bg-neutral-100 text-sm font-medium focus:bg-white focus:outline-gray-200 focus:outline-1"
         />
         <MagnifyingGlassIcon
           size="20px"
