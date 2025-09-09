@@ -15,6 +15,7 @@ interface ImagesWithExtras extends UnsplashImage {
   downloads: number;
   tags: { type: string; title: string }[];
   blurDataURL: string;
+  slug: string;
 }
 
 export default async function photo({ params }: PageProps) {
