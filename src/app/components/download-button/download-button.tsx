@@ -36,7 +36,6 @@ export default function DownloadButton({
       link.href = downloadUrl;
       link.download = filename;
       link.click();
-      document.body.removeChild(link);
     } catch (err) {
       console.error("Download failed", err);
     } finally {
