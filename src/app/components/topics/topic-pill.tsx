@@ -31,7 +31,7 @@ export default function TopicPill({
           alt={title}
           fill
           sizes="40px"
-          placeholder="blur"
+          placeholder={blurDataURL ? "blur" : undefined}
           blurDataURL={blurDataURL}
         />
       </div>
