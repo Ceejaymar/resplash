@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import InfiniteScroll from "react-infinite-scroll-component";
+// import InfiniteScroll from "react-infinite-scroll-component";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 import { type UnsplashImage } from "@/types";
@@ -19,12 +19,15 @@ export default function Gallery({
   fetchPage: FetchPage;
   columns?: Record<number, number>;
 }) {
+  const observedRef = useRef<HTMLDivElement>(null);
   const [items, setItems] = useState(initial);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const seen = useRef(new Set(initial.map((i) => i.id)));
+  const [loading, setLoading] = useState(false);
 
-  async function loadMore() {
+  const loadMore = useCallback(async () => {
+    setLoading(true);
     const next = page + 1;
 
     const res = await fetchPage(next);
@@ -41,21 +44,33 @@ export default function Gallery({
         uniques.push(p as UnsplashImage);
       }
     }
+
     setItems((prev) => [...prev, ...uniques]);
     setPage((prev) => prev + 1);
-  }
+    setLoading(false);
+  }, [hasMore, loading, page]);
+
+  useEffect(() => {
+    if (!observedRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading) {
+          loadMore();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(observedRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [loadMore]);
 
   return (
-    <InfiniteScroll
-      dataLength={items.length}
-      next={loadMore}
-      hasMore={hasMore}
-      loader={<p className="p-2 text-center text-xl font-semibold">Loading…</p>}
-      endMessage={
-        <p className="p-2 text-center text-xl font-semibold">End of feed.</p>
-      }
-      className="px-1 md:px-6"
-    >
+    <section>
       <ResponsiveMasonry columnsCountBreakPoints={columns}>
         <Masonry sequential={true}>
           {items.map((img) => (
@@ -70,7 +85,7 @@ export default function Gallery({
                 width={img.width}
                 height={img.height}
                 sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-                placeholder="blur"
+                placeholder={img.blurDataURL ? "blur" : undefined}
                 blurDataURL={img.blurDataURL}
               />
               <Link href={`/photo/${img.id}`}>
@@ -97,6 +112,13 @@ export default function Gallery({
           ))}
         </Masonry>
       </ResponsiveMasonry>
-    </InfiniteScroll>
+      {!hasMore && (
+        <p className="p-2 text-center text-xl font-semibold">End of feed</p>
+      )}
+      {hasMore && loading && (
+        <p className="p-2 text-center text-xl font-semibold">Loading…</p>
+      )}
+      {hasMore && !loading && <div ref={observedRef}></div>}
+    </section>
   );
 }
