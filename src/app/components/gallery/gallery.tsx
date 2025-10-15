@@ -119,7 +119,7 @@ export default function Gallery({
       {hasMore && loading && (
         <p className="p-2 text-center text-xl font-semibold">Loading…</p>
       )}
-      <div ref={observedRef} style={{ height: 1 }} aria-hidden="true"></div>
+      <div ref={observedRef} className="h-px" aria-hidden="true"></div>
     </section>
   );
 }
