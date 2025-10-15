@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 // import InfiniteScroll from "react-infinite-scroll-component";
@@ -26,7 +26,7 @@ export default function Gallery({
   const seen = useRef(new Set(initial.map((i) => i.id)));
   const [loading, setLoading] = useState(false);
 
-  async function loadMore() {
+  const loadMore = useCallback(async () => {
     setLoading(true);
     const next = page + 1;
 
@@ -48,14 +48,14 @@ export default function Gallery({
     setItems((prev) => [...prev, ...uniques]);
     setPage((prev) => prev + 1);
     setLoading(false);
-  }
+  }, [hasMore, loading, page]);
 
   useEffect(() => {
     if (!observedRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && !loading) {
           loadMore();
         }
       },
@@ -85,7 +85,7 @@ export default function Gallery({
                 width={img.width}
                 height={img.height}
                 sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
-                placeholder="blur"
+                placeholder={img.blurDataURL ? "blur" : undefined}
                 blurDataURL={img.blurDataURL}
               />
               <Link href={`/photo/${img.id}`}>
@@ -115,11 +115,10 @@ export default function Gallery({
       {!hasMore && (
         <p className="p-2 text-center text-xl font-semibold">End of feed</p>
       )}
-      {hasMore && loading ? (
+      {hasMore && loading && (
         <p className="p-2 text-center text-xl font-semibold">Loading…</p>
-      ) : (
-        <div ref={observedRef}></div>
       )}
+      {hasMore && !loading && <div ref={observedRef}></div>}
     </section>
   );
 }
