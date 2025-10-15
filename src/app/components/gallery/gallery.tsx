@@ -33,6 +33,7 @@ export default function Gallery({
     const res = await fetchPage(next);
 
     if (!res.length) {
+      setLoading(false);
       setHasMore(false);
       return;
     }
@@ -65,7 +66,7 @@ export default function Gallery({
     observer.observe(observedRef.current);
 
     return () => {
-      observer.disconnect();
+      if (observedRef.current) observer.unobserve(observedRef.current);
     };
   }, [loadMore]);
 
@@ -118,7 +119,7 @@ export default function Gallery({
       {hasMore && loading && (
         <p className="p-2 text-center text-xl font-semibold">Loading…</p>
       )}
-      {hasMore && !loading && <div ref={observedRef}></div>}
+      <div ref={observedRef} style={{ height: 1 }} aria-hidden="true"></div>
     </section>
   );
 }
